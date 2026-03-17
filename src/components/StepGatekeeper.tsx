@@ -36,11 +36,9 @@ const StepGatekeeper = ({ onYes, onNo }: StepGatekeeperProps) => {
         transition={{ delay: 0.3, duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
         className="glass-card w-full max-w-[520px]"
       >
-        <TextReveal
-          text="Você atua no mercado da Construção Civil?"
-          className="text-2xl md:text-4xl font-semibold tracking-tight leading-tight text-foreground text-balance mb-10"
-          delay={0.5}
-        />
+        <h1 className="text-2xl md:text-4xl font-semibold tracking-tight leading-tight text-foreground text-balance mb-10">
+          Você atua no mercado da <span className="text-primary font-bold">Construção Civil</span>?
+        </h1>
 
         <div className="flex flex-col md:flex-row gap-4">
           <motion.button

@@ -317,10 +317,10 @@ const ThankYou = () => {
         >
           <motion.div custom={0} variants={fadeUp} className="glass-card">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              Não perca sua posição
+              Não perca sua <span className="text-primary font-extrabold">posição</span>
             </h2>
-            <p className="text-muted-foreground text-sm mb-8 leading-relaxed">
-              Baixe o app agora e garanta seu acesso prioritário antes que sua
+            <p className="text-white/90 text-sm mb-8 leading-relaxed">
+              Baixe o app agora e garanta seu <strong className="text-foreground">acesso prioritário</strong> antes que sua
               vaga seja liberada para outro profissional da sua região.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

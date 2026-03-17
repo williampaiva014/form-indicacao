@@ -41,9 +41,9 @@ const StepImpactBridge = ({ onComplete }: StepImpactBridgeProps) => {
         initial={{ opacity: 0, letterSpacing: "0.2em" }}
         animate={{ opacity: 1, letterSpacing: "0.02em" }}
         transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-        className="text-lg md:text-2xl font-medium text-foreground leading-relaxed text-balance max-w-md mb-10"
+        className="text-lg md:text-2xl font-medium text-white/90 leading-relaxed text-balance max-w-md mb-10"
       >
-        Com base nas suas informações identificaremos os melhores parceiros e negócios na sua região.
+        Com base nas suas informações identificaremos os <strong className="text-foreground">melhores parceiros</strong> e <strong className="text-foreground">negócios na sua região</strong>.
       </motion.p>
 
       <motion.div
