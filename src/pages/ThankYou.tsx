@@ -246,7 +246,7 @@ const ThankYou = () => {
                   <h3 className="text-foreground font-semibold text-lg mb-2">
                     {b.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
+                  <p className="text-white/90 text-sm leading-relaxed">
                     {b.description}
                   </p>
                 </div>
