@@ -223,9 +223,9 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
 
         {openDropdown === key && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-[60vh] sm:max-h-52 overflow-y-auto glass-card !p-0"
+            className="absolute z-20 bottom-full left-0 right-0 mb-1 rounded-xl max-h-[60vh] sm:max-h-52 overflow-y-auto glass-card !p-0"
             onPointerDown={(e) => e.stopPropagation()}
           >
             <div className="px-3 py-2 border-b border-white/10 text-xs text-muted-foreground">
