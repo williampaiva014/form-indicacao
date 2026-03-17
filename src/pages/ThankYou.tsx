@@ -130,8 +130,8 @@ const ThankYou = () => {
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-6">
             Parabéns{" "}
-            <span className="text-primary">{firstName}</span>, seu acesso
-            prioritário foi aprovado!
+            <span className="text-primary">{firstName}</span>, seu{" "}
+            <span className="text-primary font-extrabold">acesso prioritário</span> foi aprovado!
           </h1>
 
           <div className="glass-card mt-8 text-left space-y-4">
