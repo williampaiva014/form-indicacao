@@ -145,7 +145,8 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-48 overflow-y-auto glass-card !p-0"
+          className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-[60vh] sm:max-h-48 overflow-y-auto glass-card !p-0"
+          onPointerDown={(e) => e.stopPropagation()}
         >
           {options.map((opt) => (
             <button
