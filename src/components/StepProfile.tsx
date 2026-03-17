@@ -56,7 +56,7 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
   const [cidadeFilter, setCidadeFilter] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Close dropdown on outside click or scroll
+  // Close dropdown on outside click only (not on scroll inside dropdown)
   const closeDropdown = useCallback(() => {
     setOpenDropdown(null);
   }, []);
@@ -68,12 +68,9 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
         closeDropdown();
       }
     };
-    const handleScroll = () => closeDropdown();
     document.addEventListener("mousedown", handleClick);
-    window.addEventListener("scroll", handleScroll, true);
     return () => {
       document.removeEventListener("mousedown", handleClick);
-      window.removeEventListener("scroll", handleScroll, true);
     };
   }, [openDropdown, closeDropdown]);
 
@@ -148,7 +145,8 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
         <motion.div
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-48 overflow-y-auto glass-card !p-0"
+          className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-[60vh] sm:max-h-48 overflow-y-auto glass-card !p-0"
+          onPointerDown={(e) => e.stopPropagation()}
         >
           {options.map((opt) => (
             <button
@@ -227,7 +225,8 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
           <motion.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-52 overflow-y-auto glass-card !p-0"
+            className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-[60vh] sm:max-h-52 overflow-y-auto glass-card !p-0"
+            onPointerDown={(e) => e.stopPropagation()}
           >
             <div className="px-3 py-2 border-b border-white/10 text-xs text-muted-foreground">
               Selecione até {max} opções ({selected.length}/{max})
@@ -270,7 +269,7 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
       animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
       exit={{ opacity: 0, y: -20, filter: "blur(10px)" }}
       transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-      className="flex flex-col items-center justify-center min-h-[100dvh] px-4 sm:px-6 py-8 pt-10"
+      className="flex flex-col items-center justify-start min-h-[100dvh] px-4 sm:px-6 py-6 pt-8 sm:pt-10 sm:justify-center overflow-y-auto"
     >
       <img src={logo} alt="Prátice Hub" className="w-36 md:w-44 mb-3" />
 
@@ -299,7 +298,8 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
               <motion.div
                 initial={{ opacity: 0, y: -8 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-60 overflow-hidden glass-card !p-0 flex flex-col"
+                className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-[60vh] sm:max-h-60 overflow-hidden glass-card !p-0 flex flex-col"
+                onPointerDown={(e) => e.stopPropagation()}
               >
                 <div className="px-3 py-2 border-b border-white/10">
                   <input
@@ -311,7 +311,7 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
                     autoFocus
                   />
                 </div>
-                <div className="overflow-y-auto max-h-48">
+                <div className="overflow-y-auto max-h-[50vh] sm:max-h-48">
                   {filteredCidades.length === 0 ? (
                     <div className="px-4 py-3 text-sm text-muted-foreground">
                       {loadingCidades ? "Carregando..." : "Nenhuma cidade encontrada"}
