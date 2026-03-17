@@ -52,6 +52,7 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
   const [loadingCidades, setLoadingCidades] = useState(false);
   const [cidadeFilter, setCidadeFilter] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
+  const dropdownRefs = useRef<{ [key in DropdownKey]?: HTMLDivElement | null }>({});
 
   // Close dropdown on outside click only (not on scroll inside dropdown)
   const closeDropdown = useCallback(() => {
@@ -93,6 +94,11 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
   const toggle = (key: DropdownKey) => {
     setOpenDropdown(prev => (prev === key ? null : key));
     if (key === "cidade") setCidadeFilter("");
+    if (key && window.innerWidth < 768) {
+        setTimeout(() => {
+          dropdownRefs.current[key]?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+    }
   };
 
   const update = (field: keyof ProfileData, value: string) => {
@@ -125,7 +131,7 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
     field: keyof ProfileData,
     Icon: React.ElementType
   ) => (
-    <div className="relative">
+    <div className="relative" ref={el => dropdownRefs.current[key] = el}>
       <label className="cinema-input-label mb-1.5 block">{label}</label>
       <button
         type="button"
@@ -183,7 +189,7 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
       : "";
 
     return (
-      <div className="relative">
+      <div className="relative" ref={el => dropdownRefs.current[key] = el}>
         <div className="flex items-center justify-between mb-1.5">
           <label className="cinema-input-label">{label}</label>
           <span className={`text-xs font-medium ${atLimit ? "text-gold" : "text-muted-foreground"}`}>

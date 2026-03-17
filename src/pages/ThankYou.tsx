@@ -112,21 +112,13 @@ const ThankYou = () => {
 
       {/* ──── HERO 01 ──── */}
       <section className="relative z-10 min-h-[100dvh] flex flex-col items-center justify-center px-6 text-center">
-        <motion.img
+        <img
           src={logo}
           alt="Prátice Hub"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
           className="w-40 md:w-52 mb-8"
         />
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.7 }}
-          className="max-w-2xl"
-        >
+        <div className="max-w-2xl">
           <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10">
             <span className="text-primary text-xs font-medium tracking-wider uppercase">
               Acesso Prioritário Aprovado
@@ -196,52 +188,29 @@ const ThankYou = () => {
               />
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.6 }}
-          className="absolute bottom-10 animate-bounce"
-        >
+        <div className="absolute bottom-10 animate-bounce">
           <ChevronDown className="w-6 h-6 text-muted-foreground/50" />
-        </motion.div>
+        </div>
       </section>
 
       {/* ──── HERO 02 — Benefícios ──── */}
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-5xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            className="text-center mb-16"
-          >
-            <motion.span
-              custom={0}
-              variants={fadeUp}
-              className="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium tracking-wider uppercase"
-            >
+          <div className="text-center mb-16">
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium tracking-wider uppercase">
               Benefícios Exclusivos
-            </motion.span>
-            <motion.h2
-              custom={1}
-              variants={fadeUp}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground"
-            >
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">
               <span className="text-primary font-extrabold">Promessas</span> de Valor
-            </motion.h2>
-          </motion.div>
+            </h2>
+          </div>
 
           <div className="grid md:grid-cols-2 gap-6">
             {benefits.map((b, i) => (
-              <motion.div
+              <div
                 key={b.title}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-50px" }}
-                variants={fadeUp}
                 className="glass-card flex gap-5 items-start group hover:border-primary/30 transition-colors duration-300"
               >
                 <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center shrink-0 group-hover:bg-primary/25 transition-colors">
@@ -263,7 +232,7 @@ const ThankYou = () => {
                       : b.description}
                   </p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -275,13 +244,7 @@ const ThankYou = () => {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             
             {/* Lado Esquerdo: Foto */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              variants={fadeUp}
-              className="relative flex justify-center order-1"
-            >
+            <div className="relative flex justify-center order-1">
               <div className="relative w-full max-w-md lg:max-w-xl">
                 {/* Efeito de brilho de fundo */}
                 <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
@@ -291,20 +254,15 @@ const ThankYou = () => {
                   className="relative z-10 w-full h-auto object-contain drop-shadow-2xl"
                 />
               </div>
-            </motion.div>
+            </div>
 
             {/* Lado Direito: Texto */}
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
-              className="space-y-6 order-2"
-            >
-              <motion.h2 custom={1} variants={fadeUp} className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-[1.3] mb-8">
+            <div className="space-y-6 order-2">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-[1.3] mb-8">
                 O Prátice Hub nasce de uma <span className="text-primary">história que pouca gente conhece de verdade.</span>
-              </motion.h2>
+              </h2>
 
-              <motion.div custom={2} variants={fadeUp} className="space-y-6 text-base leading-relaxed text-white">
+              <div className="space-y-6 text-base leading-relaxed text-white">
                 <p>
                   A história do <strong>Engenheiro Paulo Robson</strong>… um menino pobre, de uma cidade de apenas 14 mil habitantes no interior do Ceará, que <strong>decidiu vencer através da construção civil</strong>. Sem contatos. Sem atalhos. Só decisão. Por muito tempo, tentou crescer sozinho. E como acontece com a maioria… <strong>evoluiu, mas travou</strong>.
                 </p>
@@ -314,8 +272,8 @@ const ThankYou = () => {
                 <p>
                   Mas o mais importante foi entender que <strong>ninguém cresce grande jogando sozinho</strong>, e é exatamente daí que nasce o Prátice Hub. Um ecossistema onde profissionais <strong>deixam de crescer isolados</strong> e passam a <strong>gerar oportunidades conectando-se uns aos outros</strong>. Paulo Robson decidiu abrir essa porta <strong>sem custo nenhum</strong>, mas essa condição <strong>pode ser encerrada a qualquer momento</strong>. Então a pergunta é simples: você vai continuar tentando sozinho… ou vai <strong>entrar no jogo de quem cresce de verdade?</strong>
                 </p>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -323,36 +281,19 @@ const ThankYou = () => {
       {/* ──── HERO 03 — FAQ ──── */}
       <section className="relative z-10 py-24 px-6">
         <div className="max-w-3xl mx-auto">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-80px" }}
-            className="text-center mb-16"
-          >
-            <motion.span
-              custom={0}
-              variants={fadeUp}
-              className="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium tracking-wider uppercase"
-            >
+          <div className="text-center mb-16">
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium tracking-wider uppercase">
               Perguntas Frequentes
-            </motion.span>
-            <motion.h2
-              custom={1}
-              variants={fadeUp}
-              className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground"
-            >
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">
               <span className="text-primary font-extrabold">FAQ</span>
-            </motion.h2>
-          </motion.div>
+            </h2>
+          </div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
+          <div>
             <Accordion type="single" collapsible className="space-y-3">
               {faqItems.map((item, i) => (
-                <motion.div key={i} custom={i} variants={fadeUp}>
+                <div key={i}>
                   <AccordionItem
                     value={`faq-${i}`}
                     className="glass-card !p-0 border-none"
@@ -364,22 +305,17 @@ const ThankYou = () => {
                       {item.answer}
                     </AccordionContent>
                   </AccordionItem>
-                </motion.div>
+                </div>
               ))}
             </Accordion>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* ──── CTA Final ──── */}
       <section className="relative z-10 py-20 px-6">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="max-w-2xl mx-auto text-center"
-        >
-          <motion.div custom={0} variants={fadeUp} className="glass-card">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="glass-card">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               Não perca sua <span className="text-primary font-extrabold">posição</span>
             </h2>
@@ -413,8 +349,8 @@ const ThankYou = () => {
                 />
               </a>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </section>
 
       <Footer />

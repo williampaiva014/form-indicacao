@@ -52,12 +52,14 @@ const StepImpactBridge = ({ onComplete }: StepImpactBridgeProps) => {
         transition={{ delay: 0.5, duration: 0.5 }}
         className="w-full max-w-md"
       >
-        <div className="flex items-center gap-2 mb-3">
-          <Search className="w-4 h-4 text-primary animate-pulse" />
-          <span className="text-sm text-muted-foreground font-medium">
-            Buscando oportunidades...
-          </span>
-          <span className="ml-auto text-sm font-bold text-primary tabular-nums">
+        <div className="flex flex-wrap items-center justify-between gap-2 mb-3 px-1">
+          <div className="flex items-center gap-2">
+            <Search className="w-4 h-4 text-primary animate-pulse" />
+            <span className="text-sm text-muted-foreground font-medium">
+              Buscando oportunidades...
+            </span>
+          </div>
+          <span className="text-sm font-bold text-primary tabular-nums">
             {displayPercent}%
           </span>
         </div>
