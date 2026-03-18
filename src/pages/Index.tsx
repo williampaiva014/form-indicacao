@@ -43,7 +43,7 @@ const Index = () => {
   });
 
   const handleNo = () => {
-    window.location.href = "https://google.com";
+    window.location.href = "https://www.engpaulorobson.com.br/";
   };
 
   const handleImpactComplete = useCallback(() => {
