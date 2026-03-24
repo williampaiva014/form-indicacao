@@ -195,7 +195,7 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
       <div ref={containerRef} className="glass-card w-full max-w-[480px]">
         <div className="mb-6 text-center">
           <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground mb-1.5 text-balance">
-            Quem é o profissional que você quer <span className="text-primary font-bold">trazer para o Hub</span>?
+            Quem é o profissional que você quer <span className="text-primary font-bold">trazer para o Hub?</span>
           </h2>
           <p className="text-sm text-foreground/70">
             Todos os campos com <span className="text-primary font-bold">*</span> são obrigatórios

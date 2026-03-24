@@ -129,8 +129,8 @@ Ah, não esquece de informar meu e-mail *${emailInclusao}*, assim consigo evolui
 
           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.2] sm:leading-[1.1] mb-6 px-1 sm:px-0">
             Parabéns,{" "}
-            <span className="text-primary break-words">{firstName}</span>. <br className="hidden sm:block" />Mais um convite foi enviado e você acaba de{" "}
-            <span className="text-primary font-extrabold">fortalecer a sua rede</span>!
+            <span className="text-primary break-words">{firstName}.</span> <br className="hidden sm:block" />Mais um convite foi enviado e você acaba de{" "}
+            <span className="text-primary font-extrabold">fortalecer a sua rede!</span>
           </h1>
 
           <h2 className="text-base sm:text-xl md:text-2xl font-semibold text-foreground mt-8 sm:mt-10 mb-6 text-balance px-2">

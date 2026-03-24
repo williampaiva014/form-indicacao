@@ -40,7 +40,7 @@ const StepGatekeeper = ({ onYes, onNo }: StepGatekeeperProps) => {
           Você está prestes a <strong className="text-white">convidar alguém</strong> para o <strong className="text-white">Prátice Hub</strong>
         </p>
         <h1 className="text-2xl md:text-4xl font-semibold tracking-tight leading-tight text-foreground text-balance mb-10">
-          Esse profissional tem perfil para <span className="text-primary font-bold">crescer</span>, <span className="text-primary font-bold">gerar negócios</span> e <span className="text-primary font-bold">contribuir com a rede</span>?
+          Esse profissional tem perfil para <span className="text-primary font-bold">crescer,</span> <span className="text-primary font-bold">gerar negócios</span> e <span className="text-primary font-bold">contribuir com a rede?</span>
         </h1>
 
         <div className="flex flex-col md:flex-row gap-4">

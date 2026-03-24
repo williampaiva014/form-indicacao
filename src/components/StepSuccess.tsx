@@ -24,7 +24,7 @@ const StepSuccess = () => {
           </svg>
         </motion.div>
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-foreground mb-4">
-          <span className="text-primary font-bold">Cadastro realizado</span>!
+          <span className="text-primary font-bold">Cadastro realizado!</span>
         </h2>
         <p className="text-white/90 text-sm leading-relaxed">
           Em breve você receberá as <strong className="text-foreground">melhores oportunidades</strong> e <strong className="text-foreground">conexões</strong> da sua região.
