@@ -32,7 +32,7 @@ const StepHeadline = ({ onNext }: StepHeadlineProps) => {
         className="glass-card w-full max-w-[620px]"
       >
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight text-foreground text-balance mb-6">
-          Traga profissionais que <span className="text-primary font-extrabold">desejam crescer, gerar valor</span> e <span className="text-primary font-extrabold">evoluir na rede.</span>
+          <strong className="text-white font-extrabold">Exclusivo para profissionais que</strong> desejam <span className="text-primary font-extrabold">crescer,</span> <strong className="text-white font-extrabold">gerar valor</strong> e <span className="text-primary font-extrabold">evoluir na rede.</span>
         </h1>
 
         <motion.p
