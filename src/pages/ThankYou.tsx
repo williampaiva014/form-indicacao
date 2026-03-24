@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Check, Shield, Users, TrendingUp, Sparkles, ChevronDown } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -25,77 +25,66 @@ const fadeUp = {
   }),
 };
 
-const benefits = [
-  {
-    icon: TrendingUp,
-    title: "Ative a sua Carteira Infinita de clientes",
-    description:
-      "Deixe de depender apenas do seu esforço individual e utilize a força da rede para captar novos clientes.",
-    boldParts: ["força da rede", "captar novos clientes"],
-  },
-  {
-    icon: Sparkles,
-    title: "Ponte de Valor",
-    description:
-      "Rentabilize indicações por meio do Hub. Quanto mais negócios gerar, maior será o seu percentual de ganho.",
-    boldParts: ["Rentabilize indicações", "percentual de ganho"],
-  },
-  {
-    icon: Shield,
-    title: "Selo de Autoridade",
-    description:
-      "Posicione-se como um Práticer Member e diferencie-se com autoridade em um mercado cada vez mais competitivo.",
-    boldParts: ["Práticer Member", "autoridade"],
-  },
-  {
-    icon: Users,
-    title: "Networking de Elite",
-    description:
-      "Conecte-se a parceiros estratégicos e acesse conteúdos e mentorias exclusivos.",
-    boldParts: ["parceiros estratégicos", "mentorias exclusivos"],
-  },
-];
-
 const faqItems = [
   {
-    question: "1. O que é o Prátice Hub e por que fui selecionado?",
-    answer: "O Prátice Hub é um ecossistema de elite que organiza as melhores oportunidades da construção civil. Você foi selecionado por um parceiro que já faz parte do movimento porque ele reconhece seu potencial para gerar e receber negócios. Aqui, você acessa uma trilha de monetização que cresce conforme suas ações e resultados dentro da plataforma.",
+    question: "1. O que eu ganho ao indicar um novo convidado?",
+    answer: "Sua influência no ecossistema é recompensada com pontos imediatos para subir de nível. Ao subir de nível, você ganha acesso a mentorias exclusivas e ao nosso Network de Elite. Você também libera Conteúdos VIP, como trilhas avançadas de gestão e vendas. O maior benefício é o aumento real no seu percentual de bonificação em todas as trilhas de monetização da plataforma.",
   },
   {
-    question: "2. Preciso informar o e-mail do Práticer Member que me convidou?",
-    answer: "Embora não seja obrigatório para o cadastro, é altamente recomendável. Ao informar o e-mail de quem te indicou, o sistema realiza o \"check\" e valida a pontuação dupla (10 pontos para você e 10 para ele). Essa pontuação é o que acelera seu crescimento no Hub, liberando rapidamente o acesso a mentorias, conteúdos de elite e, principalmente, maiores percentuais de ganho nas suas indicações.",
+    question: "2. Qual é a vantagem para o meu convidado?",
+    answer: "Como ele foi selecionado por um membro ativo, ele terá isenção total da taxa de acesso ao Prátice Hub. O convidado entra no ecossistema com uma \"vaga custo zero\" garantida por você. Ele passa a ter acesso à \"Carteira Infinita de Clientes\" e a parcerias que geram negócios reais diariamente.",
   },
   {
-    question: "3. Qual a vantagem financeira de me inscrever através deste convite?",
-    answer: "Por vir através de um link de um membro ativo, você tem o privilégio da isenção total de custos de adesão. Ao concluir seu cadastro agora, sua ativação será 100% gratuita. Mas atenção: este convite estratégico tem validade de apenas 7 dias. Após esse prazo, a condição de isenção expira e o acesso segue as regras de adesão padrão do mercado.",
+    question: "3. Como o meu convidado recebe o convite?",
+    answer: "Assim que você finaliza o formulário, o sistema dispara automaticamente uma mensagem via WhatsApp para ele. A mensagem menciona que você o selecionou pessoalmente para integrar o movimento.",
   },
   {
-    question: "4. Como faço para acessar o Hub após preencher este formulário?",
-    answer: "O acesso é feito exclusivamente pelo nosso aplicativo oficial. Assim que enviar seus dados, você receberá o link para download. Regra de Ouro: você deve ativar seu cadastro no App utilizando o mesmo e-mail preenchido neste formulário. Isso garante que sua vaga isenta e seus pontos de entrada sejam vinculados corretamente à sua conta.",
+    question: "4. Existe um prazo para o convidado aceitar?",
+    answer: "Sim, a condição especial de isenção total de custos é por tempo limitado. O convite com esta condição exclusiva ficará ativo por apenas 7 dias.",
   },
   {
-    question: "5. Como funcionam as indicações e os ganhos financeiros (Ponte de Valor)?",
-    answer: "Dentro do App, você entra em um fluxo real de negócios. Você pode receber demandas de parceiros qualificados ou realizar suas próprias indicações, que chamamos de Ponte de Valor. Sempre que uma indicação sua for validada e convertida, você recebe uma bonificação financeira. O sistema é meritocrático: seu percentual de ganho evolui e aumenta a cada nova Ponte de Valor concretizada.",
-  },
-  {
-    question: "6. O que é o Selo de Autoridade Práticer Member?",
-    answer: "Ao ativar seu cadastro, você deixa de ser um profissional isolado para se tornar parte de um movimento de elite. O selo confere autoridade imediata perante clientes e parceiros, sinalizando que você utiliza inteligência estratégica e fiscal para garantir a máxima rentabilidade nas obras e projetos.",
-  },
-  {
-    question: "7. Terei suporte para aprender a usar as ferramentas do ecossistema?",
-    answer: "Com certeza. No App, você terá acesso às Trilhas de Evolução. São conteúdos e mentorias práticas que ensinam como extrair o máximo de lucro da sua rede de contatos, como gerir suas indicações e como escalar seu posicionamento como um profissional de elite da construção civil.",
-  },
-  {
-    question: "8. Qual o custo para manter meu perfil ativo?",
-    answer: "Como sua entrada foi via convite de um parceiro, você já inicia com validação prioritária e custo zero de adesão. Uma vez ativo, você passa a usufruir da Carteira Infinita de Clientes. O objetivo é que o próprio faturamento gerado pelas suas Pontes de Valor dentro do ecossistema impulsione e sustente o crescimento do seu negócio.",
+    question: "5. Quando os meus pontos e bônus são atualizados?",
+    answer: "A pontuação é contabilizada no momento em que o convidado ativa o perfil no app. A atualização é realizada uma vez a cada mês.",
   },
 ];
 
 const ThankYou = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const nome = (location.state as { nome?: string })?.nome || "Profissional";
+  const state = location.state as any || {};
+  const nome = state.nome || "Profissional";
   const firstName = nome.split(" ")[0];
+  const emailInclusao = state.emailInclusao || "";
+  const nomeConvidado = state.nomeConvidado || "Seu Convidado";
+  const whatsappConvidado = state.whatsappConvidado || "";
+
+  const whatsappMsgText = `Fala *${nomeConvidado}*! \uD83E\uDD1D
+
+Te convidei para o *Prátice Hub* \u2014 o maior ecossistema de negócios da construção no Brasil \uD83C\uDFD7\uFE0F.
+
+Eu já faço parte. Lá dentro, geramos *conexões, parcerias e faturamento* através de indicações \uD83D\uDCB8.
+
+\uD83D\uDCF2 *Clica no link abaixo* e ativa teu acesso no app.
+
+\u23F3 Corre, seu convite *expira em 7 dias*.
+
+Ah, não esquece de informar meu e-mail *${emailInclusao}*, assim consigo evoluir no hub \uD83D\uDE80.
+
+\uD83D\uDC49 *LINK:* https://engpaulorobson.com.br/praticehubconvidado/`;
+
+  const whatsappMsgUrl = `https://wa.me/55${whatsappConvidado.replace(/\D/g, "")}?text=${encodeURIComponent(whatsappMsgText)}`;
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(whatsappMsgText).then(() => {
+      alert("Mensagem copiada para a área de transferência!");
+    });
+  };
+
+  const renderVisualText = (text: string) => {
+    return text.split('*').map((part, i) => 
+      i % 2 === 1 ? <strong key={i} className="text-white font-extrabold">{part}</strong> : part
+    );
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -118,150 +107,94 @@ const ThankYou = () => {
       <GoldLightBeams />
 
       {/* ──── HERO 01 ──── */}
-      <section className="relative z-10 min-h-[100dvh] flex flex-col items-center justify-center px-6 text-center">
+      <section className="relative z-10 w-full min-h-[100dvh] flex flex-col items-center justify-center px-4 sm:px-6 py-12 md:py-20 text-center overflow-x-hidden">
         <img
           src={logo}
           alt="Prátice Hub"
-          className="w-40 md:w-52 mb-8"
+          className="w-32 sm:w-40 md:w-52 mb-6 sm:mb-8"
         />
 
-        <div className="max-w-2xl">
-          <div className="inline-flex items-center gap-2.5 mb-8 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm shadow-[0_0_20px_rgba(212,175,55,0.15)] text-primary">
-            <div className="relative flex items-center justify-center w-5 h-5 shrink-0">
+        <div className="w-full max-w-2xl px-2 sm:px-0">
+          <div className="inline-flex items-center gap-2 sm:gap-2.5 mb-6 sm:mb-8 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-primary/30 bg-primary/5 backdrop-blur-sm shadow-[0_0_15px_rgba(212,175,55,0.15)] text-primary justify-center w-auto max-w-full">
+            <div className="relative flex items-center justify-center w-4 h-4 sm:w-5 sm:h-5 shrink-0">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-40"></span>
               <div className="relative flex items-center justify-center w-full h-full rounded-full bg-primary/20 border border-primary/50">
-                <Check className="w-3 h-3" strokeWidth={3} />
+                <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3" strokeWidth={3} />
               </div>
             </div>
-            <span className="text-[11px] font-bold tracking-[0.15em] uppercase mt-0.5">
-              Acesso Prioritário Aprovado
+            <span className="text-[10px] sm:text-[11px] font-bold tracking-[0.1em] sm:tracking-[0.15em] uppercase mt-0.5 text-center leading-tight truncate">
+              Convite enviado com sucesso
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.1] mb-6">
-            Parabéns{" "}
-            <span className="text-primary">{firstName},</span> seu{" "}
-            <span className="text-primary font-extrabold">acesso prioritário</span> foi aprovado!
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground leading-[1.2] sm:leading-[1.1] mb-6 px-1 sm:px-0">
+            Parabéns,{" "}
+            <span className="text-primary break-words">{firstName}</span>. <br className="hidden sm:block" />Mais um convite foi enviado e você acaba de{" "}
+            <span className="text-primary font-extrabold">fortalecer a sua rede</span>!
           </h1>
 
-          <div className="glass-card mt-8 text-left space-y-4">
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-destructive/20 flex items-center justify-center shrink-0 mt-0.5">
-                <span className="text-destructive text-sm">⏳</span>
-              </div>
-              <p className="text-white/90 text-sm leading-relaxed">
-                Para manter o equilíbrio da rede liberei um{" "}
-                <strong className="text-foreground">
-                  número restrito de acessos sem custo de adesão
-                </strong>{" "}
-                por região.
-              </p>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-8 h-8 rounded-full bg-destructive/20 flex items-center justify-center shrink-0 mt-0.5">
-                <span className="text-destructive text-sm">⚠️</span>
-              </div>
-              <p className="text-white/90 text-sm leading-relaxed">
-                A demora na ativação pode{" "}
-                <strong className="text-foreground">
-                  liberar sua posição na fila regional
-                </strong>{" "}
-                para outro profissional.
-              </p>
-            </div>
-          </div>
+          <h2 className="text-base sm:text-xl md:text-2xl font-semibold text-foreground mt-8 sm:mt-10 mb-6 text-balance px-2">
+            Agora aumente as chances de ativação do seu convidado.
+          </h2>
 
-          <p className="text-foreground font-medium mt-8 mb-6 text-lg">
-            Baixe o app e cadastre sua senha de acesso
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="https://apps.apple.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-transform hover:scale-105"
-            >
-              <img
-                src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-                alt="Download on the App Store"
-                className="h-12"
-              />
-            </a>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.praticehub.comunidade"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-transform hover:scale-105"
-            >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
-                alt="Get it on Google Play"
-                className="h-12"
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className="absolute bottom-10 animate-bounce">
-          <ChevronDown className="w-6 h-6 text-muted-foreground/50" />
-        </div>
-      </section>
-
-      {/* ──── HERO 02 — Benefícios ──── */}
-      <section className="relative z-10 py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <span className="inline-block mb-4 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-primary text-xs font-medium tracking-wider uppercase">
-              Benefícios Exclusivos
-            </span>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {benefits.map((b, i) => (
-              <div
-                key={b.title}
-                className="glass-card flex gap-5 items-start group hover:border-primary/30 transition-colors duration-300"
+          <div className="glass-card !p-4 sm:!p-8 mt-2 text-left relative group w-full max-w-full mx-auto" style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}>
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 gap-3">
+              <h3 className="text-primary font-semibold text-[13px] sm:text-sm tracking-wide leading-snug">
+                Copie e envie essa mensagem para o seu convidado
+              </h3>
+              <button 
+                onClick={handleCopy}
+                className="p-2 sm:p-2.5 rounded-md bg-white/5 hover:bg-white/10 transition-colors shrink-0 border border-white/10 w-full sm:w-auto flex items-center justify-center gap-2 group-hover:bg-white/10"
+                title="Copiar mensagem"
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/15 flex items-center justify-center shrink-0 group-hover:bg-primary/25 transition-colors">
-                  <b.icon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-foreground font-semibold text-lg mb-2">
-                    {b.title}
-                  </h3>
-                  <p className="text-white/90 text-sm leading-relaxed">
-                    {b.boldParts
-                      ? b.description.split(new RegExp(`(${b.boldParts.join("|")})`, "g")).map((part, idx) =>
-                        b.boldParts!.includes(part) ? (
-                          <strong key={idx} className="text-foreground">{part}</strong>
-                        ) : (
-                          <span key={idx}>{part}</span>
-                        )
-                      )
-                      : b.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+                <span className="text-xs text-white uppercase font-bold tracking-wider">Copiar Texto</span>
+                <Copy className="w-4 h-4 text-white group-hover:text-primary transition-colors" />
+              </button>
+            </div>
+
+            <div className="bg-black/30 p-4 sm:p-5 rounded-lg border border-white/10 whitespace-pre-wrap text-white/90 text-[13px] sm:text-[15px] leading-relaxed font-medium overflow-hidden" style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}>
+              {renderVisualText(whatsappMsgText)}
+            </div>
+
+            <a
+              href={whatsappMsgUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 sm:mt-6 w-full px-4 py-3.5 sm:py-4 rounded-xl font-bold text-[13px] sm:text-[15px] md:text-lg transition-all duration-300 flex items-center justify-center gap-2 btn-gold hover:brightness-110 shadow-[0_0_20px_rgba(212,175,55,0.2)] text-center leading-snug whitespace-normal"
+            >
+              Envie sua mensagem para o seu convidado
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ──── HERO 02.5 — Quem Sou Eu ──── */}
-      <section className="relative z-10 py-24 px-6 bg-black/20 border-y border-white/5">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-
-            {/* Headline Mobile-Only (Oculta no Desktop, visível no mobile, posicionada antes da imagem) */}
-            <h2 className="block lg:hidden text-2xl sm:text-3xl font-bold tracking-tight text-white leading-[1.3] text-center mb-[-1rem] order-first">
-              O Prátice Hub nasce de uma <span className="text-primary">história que pouca gente conhece de verdade.</span>
+      {/* ──── BLOCO 02 — RECOMPENSA ──── */}
+      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
+        <div className="max-w-3xl mx-auto">
+          <div className="glass-card !p-6 sm:!p-10 text-center">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-foreground mb-6">
+              Sua <span className="text-primary">recompensa</span> já está a caminho
             </h2>
+            <p className="text-white/90 text-sm sm:text-base leading-relaxed mb-8">
+              Assim que o novo Práticer Member ativar o acesso, <strong className="text-white">seus pontos de indicação serão contabilizados</strong>. Com isso, você avança de nível dentro do Hub, desbloqueia novos acessos, conteúdos e aumenta seus percentuais de bonificação.
+            </p>
+            <button
+              onClick={() => navigate("/")}
+              className="px-6 py-3.5 rounded-xl font-semibold text-[15px] sm:text-lg transition-all duration-300 btn-gold hover:brightness-110 shadow-lg inline-flex items-center justify-center gap-2 w-full sm:w-auto"
+            >
+              👉 Indicar outro profissional
+            </button>
+          </div>
+        </div>
+      </section>
 
-            {/* Lado Esquerdo: Foto */}
-            <div className="relative flex justify-center order-1 lg:order-none">
-              <div className="relative w-full max-w-md lg:max-w-xl">
-                {/* Efeito de brilho de fundo */}
+      {/* ──── BLOCO 03 — MENSAGEM DE PROPÓSITO ──── */}
+      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6 bg-black/20 border-y border-white/5">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            {/* Esquerda: Foto */}
+            <div className="relative flex justify-center order-1 md:order-none">
+              <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
                 <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
                 <img
                   src={pauloRobsonImg}
@@ -271,22 +204,20 @@ const ThankYou = () => {
               </div>
             </div>
 
-            {/* Lado Direito: Texto */}
-            <div className="space-y-6 order-2 lg:order-none">
-              {/* Headline Desktop-Only (Visível apenas em telas grandes) */}
-              <h2 className="hidden lg:block text-3xl md:text-4xl font-bold tracking-tight text-white leading-[1.3] mb-8">
-                O Prátice Hub nasce de uma <span className="text-primary">história que pouca gente conhece de verdade.</span>
+            {/* Direita: Texto */}
+            <div className="space-y-6 order-2 md:order-none text-center md:text-left">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-snug">
+                Um <span className="text-primary">propósito</span> muito maior
               </h2>
-
-              <div className="space-y-6 text-base leading-relaxed text-white">
+              <div className="space-y-4 text-[15px] sm:text-base leading-relaxed text-white/90">
                 <p>
-                  A história do <strong>Engenheiro Paulo Robson</strong>… um menino pobre, de uma cidade de apenas 14 mil habitantes no interior do Ceará, que <strong>decidiu vencer através da construção civil</strong>. Sem contatos. Sem atalhos. Só decisão. Por muito tempo, tentou crescer sozinho. E como acontece com a maioria… <strong>evoluiu, mas travou</strong>.
+                  Você não está apenas convidando alguém.
                 </p>
                 <p>
-                  Até que em 2024, ele entendeu que para faturar mais e ganhar autoridade, precisava <strong>se conectar com profissionais e empresários em outro nível</strong>. Foi ali que <strong>o jogo virou</strong>: as <strong>conexões viraram negócios</strong>, os <strong>relacionamentos viraram oportunidades</strong> e as <strong>oportunidades viraram escala</strong>. Aquele engenheiro do interior se tornou a <strong>maior referência do Brasil</strong> em regularização de INSS de obras, economizando <strong>mais de 10 milhões em impostos</strong> e gerenciando <strong>mais de meio bilhão em obras</strong>.
+                  Você está ajudando a construir, junto comigo, um ecossistema que conecta profissionais, gera negócios reais e eleva o nível da construção no Brasil.
                 </p>
-                <p>
-                  Mas o mais importante foi entender que <strong>ninguém cresce grande jogando sozinho</strong>, e é exatamente daí que nasce o Prátice Hub. Um ecossistema onde profissionais <strong>deixam de crescer isolados</strong> e passam a <strong>gerar oportunidades conectando-se uns aos outros</strong>. Paulo Robson decidiu abrir essa porta <strong>sem custo nenhum</strong>, mas essa condição <strong>pode ser encerrada a qualquer momento</strong>. Então a pergunta é simples: você vai continuar tentando sozinho… ou vai <strong>entrar no jogo de quem cresce de verdade?</strong>
+                <p className="font-semibold text-white text-lg mt-4">
+                  Esse é o propósito do Prátice Hub. E você faz parte disso.
                 </p>
               </div>
             </div>
@@ -332,12 +263,11 @@ const ThankYou = () => {
       <section className="relative z-10 py-20 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <div className="glass-card">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-              Não perca sua <span className="text-primary font-extrabold">posição</span>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-6 text-balance leading-tight">
+              Você já instalou o App do <span className="text-primary font-extrabold">Prátice Hub?</span>
             </h2>
-            <p className="text-white/90 text-sm mb-8 leading-relaxed">
-              Baixe o app agora e garanta seu <strong className="text-foreground">acesso prioritário</strong> antes que sua
-              vaga seja liberada para outro profissional da sua região.
+            <p className="text-white/90 text-[15px] sm:text-base mb-10 leading-relaxed text-balance">
+              Para acompanhar a ativação dos seus convidados, somar seus pontos de influência e receber suas bonificações <strong className="text-foreground">(Ponte de Valor)</strong>, é fundamental que você tenha nosso aplicativo instalado no seu celular. Caso ainda não tenha baixado, acesse agora:
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

@@ -37,10 +37,10 @@ const StepGatekeeper = ({ onYes, onNo }: StepGatekeeperProps) => {
         className="glass-card w-full max-w-[520px]"
       >
         <p className="text-lg md:text-xl text-foreground/80 mb-6 text-balance">
-          Parabéns, você foi convidado a se tornar membro do maior ecossistema de construção e arquitetura do país.
+          Você está prestes a <strong className="text-white">convidar alguém</strong> para o <strong className="text-white">Prátice Hub</strong>
         </p>
         <h1 className="text-2xl md:text-4xl font-semibold tracking-tight leading-tight text-foreground text-balance mb-10">
-          Você já atua neste <span className="text-primary font-bold">setor</span>?
+          Esse profissional tem perfil para <span className="text-primary font-bold">crescer</span>, <span className="text-primary font-bold">gerar negócios</span> e <span className="text-primary font-bold">contribuir com a rede</span>?
         </h1>
 
         <div className="flex flex-col md:flex-row gap-4">

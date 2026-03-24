@@ -29,10 +29,9 @@ const formatPhone = (value: string) => {
 };
 
 const fields = [
-  { key: "nome" as const, label: "Nome completo", placeholder: "Ex: João Silva", type: "text", autoComplete: "name", icon: User },
-  { key: "email" as const, label: "Email", placeholder: "joao@empresa.com", type: "email", autoComplete: "email", icon: Mail },
-  { key: "whatsapp" as const, label: "WhatsApp", placeholder: "(99) 99999-9999", type: "tel", autoComplete: "tel", icon: Phone },
-  { key: "instagram" as const, label: "Instagram (opcional)", placeholder: "@seuusuario", type: "text", autoComplete: "off", icon: Instagram },
+  { key: "nome" as const, label: "Seu nome completo", placeholder: "Ex: João Silva", type: "text", autoComplete: "name", icon: User },
+  { key: "whatsapp" as const, label: "Seu WhatsApp", placeholder: "(99) 99999-9999", type: "tel", autoComplete: "tel", icon: Phone },
+  { key: "email" as const, label: "Seu e-mail cadastrado na plataforma", placeholder: "joao@empresa.com", type: "email", autoComplete: "email", icon: Mail },
 ];
 
 const StepContact = ({ data, onChange, onNext }: StepContactProps) => {
@@ -72,12 +71,12 @@ const StepContact = ({ data, onChange, onNext }: StepContactProps) => {
       <img src={logo} alt="Prátice Hub" className="w-36 md:w-44 mb-3" />
 
       <div className="glass-card w-full max-w-[480px]">
-        <div className="mb-8">
-          <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground mb-1.5">
-            Dados de Contato
+        <div className="mb-8 text-center">
+          <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground mb-1.5 text-balance">
+            Agora precisamos <span className="text-primary font-bold">identificar você</span> dentro do <span className="text-primary font-bold">Prátice Hub</span>
           </h2>
           <p className="text-sm text-foreground/70">
-            Os campos marcados com <span className="text-primary font-bold">*</span> são obrigatórios
+            Todos os campos com <span className="text-primary font-bold">*</span> são obrigatórios
           </p>
         </div>
 
@@ -85,7 +84,7 @@ const StepContact = ({ data, onChange, onNext }: StepContactProps) => {
           {fields.map(({ key, label, placeholder, type, autoComplete, icon: Icon }) => (
             <div key={key} className="relative">
               <label className="cinema-input-label mb-1.5 block">
-                {label} {key !== "instagram" && <span className="text-primary font-bold ml-0.5">*</span>}
+                {label} <span className="text-primary font-bold ml-0.5">*</span>
               </label>
               <div className="relative">
                 <Icon className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 cinema-input-icon" />
@@ -122,7 +121,7 @@ const StepContact = ({ data, onChange, onNext }: StepContactProps) => {
               : "bg-muted/30 text-muted-foreground cursor-not-allowed"
           }`}
         >
-          Próximo
+          Continuar Convite
           <ArrowRight className="w-5 h-5" />
         </motion.button>
       </div>

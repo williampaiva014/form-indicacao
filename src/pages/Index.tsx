@@ -35,12 +35,9 @@ const Index = () => {
     instagram: "",
   });
   const [profileData, setProfileData] = useState({
-    estado: "",
-    cidade: "",
-    servicos: [] as string[],
-    clientes: "",
-    objetivo: [] as string[],
-    indicacaoEmail: "",
+    nome: "",
+    whatsapp: "",
+    areas: [] as string[],
   });
 
   const handleNo = () => {
@@ -53,7 +50,14 @@ const Index = () => {
 
   const handleSubmit = () => {
     console.log("Lead data:", { ...contactData, ...profileData });
-    navigate("/obrigado", { state: { nome: contactData.nome } });
+    navigate("/obrigado", { 
+      state: { 
+        nome: contactData.nome,
+        emailInclusao: contactData.email,
+        nomeConvidado: profileData.nome,
+        whatsappConvidado: profileData.whatsapp
+      } 
+    });
   };
 
   return (

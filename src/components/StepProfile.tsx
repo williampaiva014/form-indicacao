@@ -1,42 +1,25 @@
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef, useCallback } from "react";
-import { MapPin, Building2, Briefcase, Users, Target, ChevronDown, Rocket, Check, Mail } from "lucide-react";
+import { useState, useRef, useCallback, useEffect } from "react";
+import { User, Phone, Briefcase, ChevronDown, Check, Rocket } from "lucide-react";
 import logo from "@/assets/logo-prata.png";
 
-const ESTADOS = [
-  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
-  "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"
-];
-
-const SERVICOS = [
+const AREAS = [
   "Projetos Arquitetônicos",
   "Projetos Complementares",
   "Execução de Obras",
   "Prestação de Serviços",
+  "Avaliador Credenciado CAIXA / BB",
   "INSS de Obras",
   "Financiamento Imobiliário",
   "Venda de Imóveis",
   "Fornecedor da construção",
-  "Outros",
-];
-
-const OBJETIVOS = [
-  "Economizar nos impostos das obras",
-  "Receber indicações.",
-  "Ser bonificado ao indicar parceiros.",
-  "Aumentar minha autoridade.",
-  "Conectar com pessoas relevantes.",
-  "Acesso a cursos e mentorias.",
-  "Pegar minhas primeiras obras/serviços.",
+  "Não sei informar",
 ];
 
 interface ProfileData {
-  estado: string;
-  cidade: string;
-  servicos: string[];
-  clientes: string;
-  objetivo: string[];
-  indicacaoEmail?: string;
+  nome: string;
+  whatsapp: string;
+  areas: string[];
 }
 
 interface StepProfileProps {
@@ -45,17 +28,24 @@ interface StepProfileProps {
   onSubmit: () => void;
 }
 
-type DropdownKey = "estado" | "cidade" | "clientes" | "servicos" | "objetivo" | null;
+const formatPhone = (value: string) => {
+  let digits = value.replace(/\D/g, "");
+  if (digits.startsWith("55") && (digits.length === 12 || digits.length === 13)) {
+    digits = digits.slice(2);
+  }
+  digits = digits.slice(0, 11);
+  if (digits.length <= 2) return digits.length ? `(${digits}` : "";
+  if (digits.length <= 7) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+};
+
+type DropdownKey = "areas" | null;
 
 const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
   const [openDropdown, setOpenDropdown] = useState<DropdownKey>(null);
-  const [cidades, setCidades] = useState<string[]>([]);
-  const [loadingCidades, setLoadingCidades] = useState(false);
-  const [cidadeFilter, setCidadeFilter] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
-  const dropdownRefs = useRef<{ [key in DropdownKey]?: HTMLDivElement | null }>({});
+  const dropdownRefs = useRef<{ [key in NonNullable<DropdownKey>]?: HTMLDivElement | null }>({});
 
-  // Close dropdown on outside click only (not on scroll inside dropdown)
   const closeDropdown = useCallback(() => {
     setOpenDropdown(null);
   }, []);
@@ -73,40 +63,21 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
     };
   }, [openDropdown, closeDropdown]);
 
-  useEffect(() => {
-    if (!data.estado) {
-      setCidades([]);
-      return;
-    }
-    setLoadingCidades(true);
-    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${data.estado}/municipios?orderBy=nome`)
-      .then(res => res.json())
-      .then((municipios: { nome: string }[]) => {
-        setCidades(municipios.map(m => m.nome));
-      })
-      .catch(() => setCidades([]))
-      .finally(() => setLoadingCidades(false));
-  }, [data.estado]);
-
-  const filteredCidades = cidadeFilter
-    ? cidades.filter(c => c.toLowerCase().includes(cidadeFilter.toLowerCase()))
-    : cidades;
-
   const toggle = (key: DropdownKey) => {
     setOpenDropdown(prev => (prev === key ? null : key));
-    if (key === "cidade") setCidadeFilter("");
     if (key && window.innerWidth < 768) {
       setTimeout(() => {
-        dropdownRefs.current[key]?.scrollIntoView({ behavior: "smooth", block: "start" });
+        dropdownRefs.current[key as "areas"]?.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 100);
     }
   };
 
-  const update = (field: keyof ProfileData, value: string) => {
+  const updateText = (field: keyof ProfileData, value: string) => {
+    if (field === "whatsapp") value = formatPhone(value);
     onChange({ ...data, [field]: value });
   };
 
-  const toggleMulti = (field: "servicos" | "objetivo", value: string, max: number) => {
+  const toggleMulti = (field: "areas", value: string, max: number) => {
     const current = data[field];
     if (current.includes(value)) {
       onChange({ ...data, [field]: current.filter((v) => v !== value) });
@@ -119,68 +90,15 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
     }
   };
 
-  const isValid = data.estado && data.cidade.trim() && data.servicos.length > 0 && data.clientes && data.objetivo.length > 0;
-
-  const clienteOptions = ["Obras de Pessoa Física", "Obras de Pessoa Jurídica", "Ambos"];
-
-  const renderSelect = (
-    key: DropdownKey,
-    label: string,
-    value: string,
-    placeholder: string,
-    options: string[],
-    field: keyof ProfileData,
-    Icon: React.ElementType
-  ) => (
-    <div className="relative" ref={el => dropdownRefs.current[key] = el}>
-      <label className="cinema-input-label mb-1.5 block">{label} <span className="text-primary font-bold ml-0.5">*</span></label>
-      <button
-        type="button"
-        onClick={() => toggle(key)}
-        className="cinema-input text-left flex items-center gap-2"
-      >
-        <Icon className="w-4 h-4 cinema-input-icon shrink-0" />
-        <span className={`truncate flex-1 ${value ? "" : "opacity-50"}`}>
-          {value || placeholder}
-        </span>
-        <ChevronDown className={`w-4 h-4 opacity-50 transition-transform shrink-0 ${openDropdown === key ? "rotate-180" : ""}`} />
-      </button>
-      {openDropdown === key && (
-        <motion.div
-          initial={{ opacity: 0, y: -8 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-[60vh] sm:max-h-48 overflow-y-auto glass-card !p-0"
-          onPointerDown={(e) => e.stopPropagation()}
-        >
-          {options.map((opt) => (
-            <button
-              key={opt}
-              type="button"
-              onClick={() => {
-                if (field === "estado") {
-                  onChange({ ...data, estado: opt, cidade: "" });
-                } else {
-                  update(field, opt);
-                }
-                setOpenDropdown(null);
-              }}
-              className="w-full text-left px-4 py-2.5 text-sm text-foreground hover:bg-primary/20 transition-colors first:rounded-t-xl last:rounded-b-xl"
-            >
-              {opt}
-            </button>
-          ))}
-        </motion.div>
-      )}
-    </div>
-  );
+  const isValid = data.nome.trim() && data.whatsapp.replace(/\D/g, "").length >= 11 && data.areas.length > 0;
 
   const renderMultiSelect = (
-    key: DropdownKey,
+    key: "areas",
     label: string,
     selected: string[],
     placeholder: string,
     options: string[],
-    field: "servicos" | "objetivo",
+    field: "areas",
     max: number,
     Icon: React.ElementType
   ) => {
@@ -209,7 +127,6 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
           <ChevronDown className={`w-4 h-4 opacity-50 transition-transform shrink-0 ${openDropdown === key ? "rotate-180" : ""}`} />
         </button>
 
-        {/* Selected tags */}
         {selected.length > 0 && openDropdown !== key && (
           <div className="flex flex-wrap gap-1.5 mt-2">
             {selected.map((s) => (
@@ -276,91 +193,49 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
       <img src={logo} alt="Prátice Hub" className="w-36 md:w-44 mb-3" />
 
       <div ref={containerRef} className="glass-card w-full max-w-[480px]">
-        <div className="mb-6">
-          <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground mb-1.5">
-            Perfil Profissional
+        <div className="mb-6 text-center">
+          <h2 className="text-xl md:text-2xl font-semibold tracking-tight text-foreground mb-1.5 text-balance">
+            Quem é o profissional que você quer <span className="text-primary font-bold">trazer para o Hub</span>?
           </h2>
           <p className="text-sm text-foreground/70">
-            Os campos marcados com <span className="text-primary font-bold">*</span> são obrigatórios
+            Todos os campos com <span className="text-primary font-bold">*</span> são obrigatórios
           </p>
         </div>
 
         <div className="space-y-4">
-          {renderSelect("estado", "Estado", data.estado, "Selecione seu estado", ESTADOS, "estado", MapPin)}
-
-          <div className="relative">
-            <label className="cinema-input-label mb-1.5 block">Cidade <span className="text-primary font-bold ml-0.5">*</span></label>
-            <button
-              type="button"
-              onClick={() => { if (data.estado) toggle("cidade"); }}
-              className={`cinema-input text-left flex items-center gap-2 ${!data.estado ? "opacity-50 cursor-not-allowed" : ""}`}
-            >
-              <Building2 className="w-4 h-4 cinema-input-icon shrink-0" />
-              <span className={`truncate flex-1 ${data.cidade ? "" : "opacity-50"}`}>
-                {loadingCidades ? "Carregando cidades..." : data.cidade || (data.estado ? "Selecione sua cidade" : "Selecione um estado primeiro")}
-              </span>
-              <ChevronDown className={`w-4 h-4 opacity-50 transition-transform shrink-0 ${openDropdown === "cidade" ? "rotate-180" : ""}`} />
-            </button>
-            {openDropdown === "cidade" && (
-              <motion.div
-                initial={{ opacity: 0, y: -8 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="absolute z-20 top-full left-0 right-0 mt-1 rounded-xl max-h-[60vh] sm:max-h-60 overflow-hidden glass-card !p-0 flex flex-col"
-                onPointerDown={(e) => e.stopPropagation()}
-              >
-                <div className="px-3 py-2 border-b border-white/10">
-                  <input
-                    type="text"
-                    value={cidadeFilter}
-                    onChange={(e) => setCidadeFilter(e.target.value)}
-                    placeholder="Buscar cidade..."
-                    className="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
-                    autoFocus
-                  />
-                </div>
-                <div className="overflow-y-auto max-h-[50vh] sm:max-h-48">
-                  {filteredCidades.length === 0 ? (
-                    <div className="px-4 py-3 text-sm text-muted-foreground">
-                      {loadingCidades ? "Carregando..." : "Nenhuma cidade encontrada"}
-                    </div>
-                  ) : (
-                    filteredCidades.map((cidade) => (
-                      <button
-                        key={cidade}
-                        type="button"
-                        onClick={() => { update("cidade", cidade); setOpenDropdown(null); }}
-                        className="w-full text-left px-4 py-2.5 text-sm text-foreground hover:bg-primary/20 transition-colors"
-                      >
-                        {cidade}
-                      </button>
-                    ))
-                  )}
-                </div>
-              </motion.div>
-            )}
-          </div>
-
-          {renderMultiSelect("servicos", "Quais serviços você presta?", data.servicos, "Selecione seus serviços", SERVICOS, "servicos", 3, Briefcase)}
-
-          {renderSelect("clientes", "Seus clientes são principalmente", data.clientes, "Selecione uma opção", clienteOptions, "clientes", Users)}
-
-          {renderMultiSelect("objetivo", "Qual seu maior objetivo no hub?", data.objetivo, "Selecione seus objetivos", OBJETIVOS, "objetivo", 2, Target)}
-
           <div className="relative">
             <label className="cinema-input-label mb-1.5 block">
-              Digite o e-mail do Práticer Member que te convidou
+              Nome do convidado <span className="text-primary font-bold ml-0.5">*</span>
             </label>
             <div className="relative">
-              <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 cinema-input-icon" />
+              <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 cinema-input-icon" />
               <input
-                type="email"
-                value={data.indicacaoEmail || ""}
-                onChange={(e) => update("indicacaoEmail", e.target.value)}
-                placeholder="E-mail de quem te indicou (opcional)"
+                type="text"
+                value={data.nome}
+                onChange={(e) => updateText("nome", e.target.value)}
+                placeholder="Ex: João Silva"
                 className="cinema-input !pl-10 w-full"
               />
             </div>
           </div>
+
+          <div className="relative">
+            <label className="cinema-input-label mb-1.5 block">
+              WhatsApp do convidado <span className="text-primary font-bold ml-0.5">*</span>
+            </label>
+            <div className="relative">
+              <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 cinema-input-icon" />
+              <input
+                type="tel"
+                value={data.whatsapp}
+                onChange={(e) => updateText("whatsapp", e.target.value)}
+                placeholder="(99) 99999-9999"
+                className="cinema-input !pl-10 w-full"
+              />
+            </div>
+          </div>
+
+          {renderMultiSelect("areas", "Em quais áreas esse profissional atua?", data.areas, "Selecione as opções", AREAS, "areas", 3, Briefcase)}
         </div>
 
         <motion.button
@@ -374,7 +249,7 @@ const StepProfile = ({ data, onChange, onSubmit }: StepProfileProps) => {
             }`}
         >
           <Rocket className="w-5 h-5" />
-          Finalizar e Acessar o Hub
+          Enviar Convite e gerar pontos
         </motion.button>
       </div>
     </motion.div>

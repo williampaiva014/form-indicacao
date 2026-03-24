@@ -32,7 +32,7 @@ const StepHeadline = ({ onNext }: StepHeadlineProps) => {
         className="glass-card w-full max-w-[620px]"
       >
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight leading-tight text-foreground text-balance mb-6">
-          Pare de tentar <span className="text-primary font-extrabold">crescer sozinho.</span> Quem joga isolado só sobrevive. Quem se conecta, <span className="text-primary font-extrabold">domina.</span>
+          Aqui não buscamos quantidade. Buscamos profissionais que <span className="text-primary font-extrabold">crescem</span>, <span className="text-primary font-extrabold">geram valor</span> e <span className="text-primary font-extrabold">fazem a rede evoluir.</span>
         </h1>
 
         <motion.p
@@ -41,7 +41,7 @@ const StepHeadline = ({ onNext }: StepHeadlineProps) => {
           transition={{ delay: 1.2, duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
           className="text-base md:text-lg text-white/90 leading-relaxed text-balance mb-10"
         >
-          Ative sua <strong className="text-foreground">Carteira Infinita</strong> de clientes e escale seu lucro na <strong className="text-foreground">trilha de monetização</strong>: indicando parceiros e recebendo <strong className="text-foreground"> indicações de negócios qualificados</strong>.
+          Cada convite ativado <strong className="text-white">acelera sua evolução</strong> dentro do Hub, <strong className="text-white">aumenta sua bonificação</strong> e <strong className="text-white">libera novos acessos.</strong>
         </motion.p>
 
         <motion.button
@@ -56,7 +56,7 @@ const StepHeadline = ({ onNext }: StepHeadlineProps) => {
           onClick={onNext}
           className="w-full md:w-auto py-4 px-10 rounded-xl btn-gold text-lg transition-all duration-300 hover:brightness-110"
         >
-          Quero entrar pro Hub agora!
+          Quero evoluir no Prátice Hub
         </motion.button>
       </motion.div>
     </motion.div>

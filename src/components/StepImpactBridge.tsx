@@ -43,7 +43,7 @@ const StepImpactBridge = ({ onComplete }: StepImpactBridgeProps) => {
         transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
         className="text-lg md:text-2xl font-medium text-white/90 leading-relaxed text-balance max-w-md mb-10"
       >
-        Com base nas suas informações identificaremos os <strong className="text-foreground">melhores parceiros</strong> e <strong className="text-foreground">negócios na sua região</strong>.
+        Identificamos seu perfil no Hub. <strong className="text-foreground">Liberando acesso de indicação...</strong>
       </motion.p>
 
       <motion.div
@@ -56,7 +56,7 @@ const StepImpactBridge = ({ onComplete }: StepImpactBridgeProps) => {
           <div className="flex items-center gap-2">
             <Search className="w-4 h-4 text-primary animate-pulse" />
             <span className="text-sm text-muted-foreground font-medium">
-              Buscando oportunidades...
+              Configurando seus benefícios de pontuação...
             </span>
           </div>
           <span className="text-sm font-bold text-primary tabular-nums">
